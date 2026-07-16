@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>우리반 공유 보드</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <h1>📌 우리반 공유 보드</h1>
+  <div class="room-controls">
+    <label>이름
+      <input id="nicknameInput" type="text" placeholder="예: 3반 홍길동" maxlength="20" />
+    </label>
+    <label>반 코드
+      <input id="roomCodeInput" type="text" placeholder="예: 3-2-giga" maxlength="30" />
+    </label>
+    <button id="joinRoomBtn" type="button">입장</button>
+    <span id="connectionStatus" class="status-badge">설정 필요</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <main class="board-panel">
+    <form id="postForm" class="post-form">
+      <div class="type-toggle">
+        <label><input type="radio" name="postType" value="link" checked /> 🔗 링크</label>
+        <label><input type="radio" name="postType" value="file" /> 📎 파일</label>
+      </div>
+
+      <div id="linkFields" class="post-fields">
+        <input id="linkUrlInput" type="url" placeholder="https:// 로 시작하는 링크를 붙여넣으세요" />
+      </div>
+
+      <div id="fileFields" class="post-fields" hidden>
+        <input id="fileInput" type="file" />
+        <p class="hint">파일은 700KB 이하만 업로드할 수 있어요. 큰 파일은 구글 드라이브 등에 올린 뒤 링크로 공유해주세요.</p>
+      </div>
+
+      <input id="captionInput" type="text" placeholder="설명(선택)" maxlength="80" />
+
+      <button type="submit">올리기</button>
+    </form>
+
+    <div id="boardEmpty" class="board-empty">아직 올라온 자료가 없어요. 첫 번째로 올려보세요!</div>
+    <div id="board" class="board-grid"></div>
+  </main>
+
+  <aside class="side-panel">
+    <section class="widget timer-widget">
+      <h2>⏱ 타이머</h2>
+      <div id="timerDisplay" class="timer-display">05:00</div>
+      <div class="timer-presets">
+        <button type="button" data-min="1">1분</button>
+        <button type="button" data-min="3">3분</button>
+        <button type="button" data-min="5">5분</button>
+        <button type="button" data-min="10">10분</button>
+        <button type="button" data-min="15">15분</button>
+        <button type="button" data-min="20">20분</button>
+        <button type="button" data-min="25">25분</button>
+      </div>
+      <div class="timer-custom">
+        <input id="customMinutes" type="number" min="0" max="180" placeholder="분" />
+        <input id="customSeconds" type="number" min="0" max="59" placeholder="초" />
+        <button id="setCustomTimeBtn" type="button">설정</button>
+      </div>
+      <div class="timer-controls">
+        <button id="timerStartBtn" type="button">시작</button>
+        <button id="timerPauseBtn" type="button">일시정지</button>
+        <button id="timerResetBtn" type="button">초기화</button>
+        <button id="timerFullscreenBtn" type="button">전체화면</button>
+      </div>
+      <label class="sound-toggle">
+        <input id="timerSoundToggle" type="checkbox" checked /> 종료 시 알림음
+      </label>
+    </section>
+
+    <section class="widget bgm-widget">
+      <h2>🎵 잔잔한 BGM</h2>
+      <div class="bgm-presets">
+        <select id="bgmPresetSelect">
+          <option value="pad">잔잔한 패드</option>
+          <option value="rain">빗소리 화이트노이즈</option>
+          <option value="lofi">로파이 아르페지오</option>
+        </select>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmToggleBtn" type="button">▶ 재생</button>
+        <label class="volume-control">
+          볼륨
+          <input id="bgmVolumeSlider" type="range" min="0" max="100" value="40" />
+        </label>
+      </div>
+    </section>
+  </aside>
+
+</div>
+
+<div id="timerOverlay" class="timer-overlay" hidden>
+  <div id="timerOverlayDisplay" class="timer-overlay-display">05:00</div>
+  <button id="exitFullscreenBtn" type="button">닫기</button>
+</div>
+
+<script type="module" src="js/firebase-config.js"></script>
+<script type="module" src="js/app.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/bgm.js"></script>
+</body>
+</html>
