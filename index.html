@@ -78,6 +78,17 @@
       </label>
     </section>
 
+    <section class="widget download-widget">
+      <h2>📥 시험·면접 자료</h2>
+      <a class="download-btn" href="downloads/isee-middle-practice.pdf" download="ISEE_Middle_Level_Practice.pdf">
+        📝 ISEE Middle Level 기출 유형 문제집 (PDF)
+      </a>
+      <a class="download-btn" href="downloads/interview-sentences.pdf" download="Interview_Essential_Sentences.pdf">
+        🎤 영어면접 필수 문장 암기북 (PDF)
+      </a>
+      <p class="hint">클릭하면 바로 다운로드됩니다.</p>
+    </section>
+
     <section class="widget bgm-widget">
       <h2>🎵 잔잔한 BGM</h2>
       <div class="bgm-presets">
@@ -91,9 +102,11 @@
         <button id="bgmToggleBtn" type="button">▶ 재생</button>
         <label class="volume-control">
           볼륨
-          <input id="bgmVolumeSlider" type="range" min="0" max="100" value="40" />
+          <input id="bgmVolumeSlider" type="range" min="0" max="100" value="60" />
         </label>
       </div>
+      <button id="soundTestBtn" type="button" class="sound-test-btn">🔊 소리 테스트</button>
+      <p id="audioStatus" class="audio-status" role="status" aria-live="polite"></p>
     </section>
   </aside>
 
@@ -106,6 +119,7 @@
 
 <script type="module" src="js/firebase-config.js"></script>
 <script type="module" src="js/app.js"></script>
+<script src="js/audio.js"></script>
 <script src="js/timer.js"></script>
 <script src="js/bgm.js"></script>
 </body>

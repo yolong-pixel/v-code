@@ -34,6 +34,7 @@
 
   function setSeconds(seconds) {
     stop();
+    window.ClassAudio.release("timer");
     totalSeconds = seconds;
     remainingSeconds = seconds;
     render();
@@ -46,26 +47,17 @@
     }
   }
 
+  // 타이머 종료 알림음: '시작' 클릭 때 미리 열어 둔 공용 AudioContext 를 재사용합니다.
+  // (예전 코드는 종료 순간에 새 AudioContext 를 만들어 브라우저가 자동재생으로 차단했습니다.)
   function playBeep() {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const now = ctx.currentTime;
-      for (let i = 0; i < 3; i++) {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = "sine";
-        osc.frequency.value = 880;
-        gain.gain.setValueAtTime(0, now + i * 0.5);
-        gain.gain.linearRampToValueAtTime(0.3, now + i * 0.5 + 0.02);
-        gain.gain.linearRampToValueAtTime(0, now + i * 0.5 + 0.35);
-        osc.connect(gain).connect(ctx.destination);
-        osc.start(now + i * 0.5);
-        osc.stop(now + i * 0.5 + 0.4);
-      }
-      setTimeout(() => ctx.close(), 2000);
-    } catch (e) {
-      console.error(e);
-    }
+    const ctx = window.ClassAudio.getContext();
+    if (!ctx) return;
+    const done = () => {
+      const seconds = window.ClassAudio.chime(ctx, { times: 3, freq: 880, gap: 0.5 });
+      setTimeout(() => window.ClassAudio.release("timer"), seconds * 1000 + 200);
+    };
+    if (ctx.state === "running") done();
+    else ctx.resume().then(done, (e) => console.error(e));
   }
 
   function tick() {
@@ -82,10 +74,20 @@
 
   startBtn.addEventListener("click", () => {
     if (intervalId || remainingSeconds <= 0) return;
+    // 클릭(사용자 제스처) 시점에 오디오 잠금 해제 → 종료 시 알림음이 확실히 울림
+    if (soundToggle.checked) window.ClassAudio.unlock("timer");
     intervalId = setInterval(tick, 1000);
   });
 
-  pauseBtn.addEventListener("click", stop);
+  pauseBtn.addEventListener("click", () => {
+    stop();
+    window.ClassAudio.release("timer");
+  });
+
+  soundToggle.addEventListener("change", () => {
+    if (!soundToggle.checked) window.ClassAudio.release("timer");
+    else if (intervalId) window.ClassAudio.unlock("timer");
+  });
 
   resetBtn.addEventListener("click", () => {
     setSeconds(totalSeconds);
