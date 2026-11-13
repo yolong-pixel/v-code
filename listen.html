@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>면접·ISEE 듣기 암기장</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap">
+<style>
+/* Layout: 한 줄 목록(카드) + 화면 아래 고정 플레이어. 지금 읽는 문장은 형광펜처럼 표시 */
+:root {
+  --bg: #eef1f5;
+  --surface: #ffffff;
+  --ink: #16202b;
+  --muted: #5a6776;
+  --line: #d4dae3;
+  --accent: #2a52a0;
+  --accent-ink: #ffffff;
+  --accent-soft: #e1e8f6;
+  --mark: #ffef9e;
+  --mark-ink: #16202b;
+  --font-body: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141b; --surface: #18202a; --ink: #e5eaf0; --muted: #94a1b0; --line: #2a3442;
+    --accent: #8eaef0; --accent-ink: #0f141b; --accent-soft: #223252; --mark: #5a4d14; --mark-ink: #fff6cf;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b; --surface: #18202a; --ink: #e5eaf0; --muted: #94a1b0; --line: #2a3442;
+  --accent: #8eaef0; --accent-ink: #0f141b; --accent-soft: #223252; --mark: #5a4d14; --mark-ink: #fff6cf;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px calc(150px + env(safe-area-inset-bottom, 0px));
+}
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 16px; }
+h1 { font-size: 1.55rem; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lead { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab { border: 1px solid var(--line); background: var(--surface); padding: 7px 14px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; }
+.tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.settings { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px 16px; }
+.settings label { display: grid; gap: 3px; font-size: 0.8rem; color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
+.settings select { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); min-width: 0; width: 100%; }
+.settings .check { display: flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 400; font-size: 0.88rem; letter-spacing: 0; }
+.settings .check input { width: 18px; height: 18px; accent-color: var(--accent); }
+.notice { font-size: 0.85rem; color: var(--muted); margin: 0; }
+.notice.warn { color: var(--ink); background: var(--mark); color: var(--mark-ink); padding: 8px 12px; border-radius: 8px; }
+
+.group-title { margin: 10px 0 0; font-size: 0.8rem; color: var(--muted); font-weight: 700; letter-spacing: 0.06em; }
+.list { display: grid; gap: 10px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.card.now { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.card-head { display: flex; align-items: flex-start; gap: 10px; }
+.num { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 3px; min-width: 2.2em; font-variant-numeric: tabular-nums; }
+.tag { margin-right: 6px; font-size: 0.72rem; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.q { flex: 1; min-width: 0; }
+.q .en { font-weight: 700; font-size: 1.05rem; }
+.play-one { margin-left: auto; flex: none; border: 1px solid var(--line); background: var(--bg); border-radius: 999px; width: 34px; height: 34px; display: grid; place-items: center; font-size: 0.8rem; }
+.lines { display: grid; gap: 6px; padding-left: calc(2.2em + 10px); }
+.line { border-radius: 6px; padding: 2px 6px; margin: 0 -6px; cursor: pointer; }
+.line .en, .q .en { display: block; }
+.line .en { font-weight: 600; }
+.ko { display: block; color: var(--muted); font-size: 0.88rem; }
+.speaking { background: var(--mark); color: var(--mark-ink); }
+.speaking .ko { color: inherit; opacity: 0.8; }
+.word { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.01em; }
+.hide-ans .lines .line:not(.revealed) .en { filter: blur(6px); user-select: none; }
+.hide-ans .lines .line:not(.revealed) .ko { filter: blur(4px); }
+.hide-ans.hide-ko-only .lines .line:not(.revealed) .ko { filter: none; }
+
+.player { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: var(--surface); border-top: 1px solid var(--line);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+.player-in { max-width: 760px; margin: 0 auto; display: grid; gap: 8px; }
+.now-label { font-size: 0.85rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 1.4em; }
+.now-label b { color: var(--ink); }
+.controls { display: flex; align-items: center; gap: 8px; }
+.ctl { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; height: 44px; min-width: 48px; padding: 0 12px; font-weight: 600; }
+.ctl.main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); flex: 1; font-size: 1rem; }
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.3s; }
+.src { font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.src p { margin: 2px 0; }
+@media (prefers-reduced-motion: reduce) { .progress i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>면접·ISEE 듣기 암기장</h1>
+    <p class="lead">질문을 듣고 잠깐 스스로 답해 본 뒤 모범 답변을 들어요. 지금 읽는 문장은 형광펜으로 표시돼요. 문장을 누르면 그 문장만 다시 들을 수 있어요.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="학습 자료">
+    <button class="tab" role="tab" id="tab-qa" data-tab="qa" type="button">면접 질문·답변</button>
+    <button class="tab" role="tab" id="tab-sentences" data-tab="sentences" type="button">필수 문장 37</button>
+    <button class="tab" role="tab" id="tab-isee" data-tab="isee" type="button">ISEE 단어·문장</button>
+  </nav>
+
+  <section class="settings" aria-label="듣기 설정">
+    <label for="rate">말하기 속도
+      <select id="rate">
+        <option value="0.7">느리게 (0.7×)</option>
+        <option value="0.85">조금 느리게 (0.85×)</option>
+        <option value="1" selected>보통 (1×)</option>
+        <option value="1.15">빠르게 (1.15×)</option>
+      </select>
+    </label>
+    <label for="think">질문 뒤 생각할 시간
+      <select id="think">
+        <option value="0">바로 답변</option>
+        <option value="3">3초</option>
+        <option value="5" selected>5초</option>
+        <option value="10">10초</option>
+        <option value="20">20초 (직접 말해 보기)</option>
+      </select>
+    </label>
+    <label for="repeatMode">반복
+      <select id="repeatMode">
+        <option value="all" selected>전체 반복</option>
+        <option value="one">한 항목만 반복</option>
+        <option value="none">한 번만 듣기</option>
+      </select>
+    </label>
+    <label for="voice">영어 목소리
+      <select id="voice"><option value="">자동 선택</option></select>
+    </label>
+    <label class="check" for="sayKo"><input id="sayKo" type="checkbox" checked> 한국어 뜻도 읽기</label>
+    <label class="check" for="hideAns"><input id="hideAns" type="checkbox"> 답 가리기 (들을 때 나타남)</label>
+  </section>
+
+  <p id="ttsNotice" class="notice">휴대폰은 화면을 켜 둔 상태에서 들어 주세요. 화면이 꺼지면 읽기가 멈출 수 있어요. iPhone은 옆면 무음 스위치도 확인해 주세요.</p>
+
+  <main id="list" class="list" aria-live="off"></main>
+
+  <footer class="src">
+    <p>답변 속 이름·학교·활동(김민준, 첼로, 로봇 동아리 등)은 예시예요. 문장 구조는 외우고, 내용은 자기 경험으로 바꿔 말하세요.</p>
+    <p>ISEE 문항은 시험 형식에 맞춰 새로 만든 예상문제이며 실제 기출이 아니에요. 음성은 기기에 설치된 브라우저 음성(Web Speech API)을 써서 기기마다 목소리가 달라요.</p>
+    <p>참고: boardingschools.com 「Top 10 Questions Asked During Boarding School Interviews」 · boardingschoolreview.com 「Boarding School Interview Tips: 2026 Student Guide」 · MDN 「SpeechSynthesis」</p>
+  </footer>
+</div>
+
+<div class="player" role="region" aria-label="재생기">
+  <div class="player-in">
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <div id="nowLabel" class="now-label">▶ 를 누르면 처음부터 들려줘요.</div>
+    <div class="controls">
+      <button id="prevBtn" class="ctl" type="button" aria-label="이전 항목">◀◀</button>
+      <button id="playBtn" class="ctl main" type="button">▶ 듣기 시작</button>
+      <button id="nextBtn" class="ctl" type="button" aria-label="다음 항목">▶▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = {"qa": [{"tag": "자기소개", "q": {"en": "Tell me about yourself.", "ko": "자기소개를 해 주세요."}, "lines": [{"en": "Good morning, and thank you for having me today.", "ko": "안녕하세요, 오늘 이 자리에 불러 주셔서 감사합니다."}, {"en": "My name is Minjun Kim, and I'm in seventh grade at Hanbit Middle School in Seoul.", "ko": "제 이름은 김민준이고, 서울 한빛중학교 1학년(7학년)입니다."}, {"en": "I would describe myself as a curious person who loves asking why.", "ko": "저는 '왜?'라고 묻기를 좋아하는 호기심 많은 사람이라고 생각합니다."}, {"en": "Outside of class, I spend most of my time playing the cello and building small robots with my friends.", "ko": "수업 외 시간에는 주로 첼로를 연주하고 친구들과 작은 로봇을 만들며 보냅니다."}]}, {"tag": "지원 동기", "q": {"en": "Why do you want to attend our school?", "ko": "왜 우리 학교에 오고 싶나요?"}, "lines": [{"en": "I'm interested in your school because of its engineering program.", "ko": "귀교의 공학 프로그램 때문에 지원하게 되었습니다."}, {"en": "When I visited the campus, I was impressed by how students and teachers worked together like a team.", "ko": "캠퍼스를 방문했을 때 학생과 선생님이 한 팀처럼 함께하는 모습이 인상 깊었습니다."}, {"en": "I'm looking for a community where I can challenge myself and learn from people with different backgrounds.", "ko": "스스로에게 도전하고 다양한 배경의 친구들에게 배울 수 있는 공동체를 찾고 있습니다."}, {"en": "I believe I can contribute to your school by sharing my love of music and robotics.", "ko": "음악과 로봇에 대한 제 열정을 나누며 학교에 기여할 수 있다고 생각합니다."}]}, {"tag": "학업", "q": {"en": "What is your favorite subject, and why?", "ko": "가장 좋아하는 과목과 그 이유는?"}, "lines": [{"en": "My favorite subject is science because I love finding out how things work.", "ko": "제가 가장 좋아하는 과목은 과학입니다. 사물이 어떻게 작동하는지 알아내는 것이 좋기 때문입니다."}, {"en": "Last semester, I designed my own experiment to test how different kinds of light affect plant growth.", "ko": "지난 학기에 빛의 종류가 식물 성장에 어떤 영향을 주는지 알아보는 실험을 직접 설계했습니다."}, {"en": "I enjoy projects where I can work with others and come up with creative solutions.", "ko": "다른 사람과 협력해 창의적인 해결책을 찾는 프로젝트를 좋아합니다."}]}, {"tag": "학업", "q": {"en": "Which subject do you find most challenging?", "ko": "가장 어려운 과목은 무엇인가요?"}, "lines": [{"en": "The subject I find most challenging is English writing, but I've improved by keeping a journal every night.", "ko": "가장 어려운 과목은 영어 글쓰기지만, 매일 밤 일기를 쓰면서 실력이 늘었습니다."}, {"en": "At first, it took me an hour to write one page, but now I can write more quickly and clearly.", "ko": "처음에는 한 쪽을 쓰는 데 한 시간이 걸렸지만, 지금은 더 빠르고 명확하게 쓸 수 있습니다."}, {"en": "I learned that small daily habits make a big difference.", "ko": "작은 습관이 매일 쌓이면 큰 차이를 만든다는 것을 배웠습니다."}]}, {"tag": "독서", "q": {"en": "What book have you read recently?", "ko": "최근에 읽은 책은 무엇인가요?"}, "lines": [{"en": "Recently, I read Wonder by R. J. Palacio, and it made me think about kindness.", "ko": "최근에 R. J. 팔라시오의 『원더』를 읽었는데, 친절에 대해 생각해 보게 되었습니다."}, {"en": "The main character, Auggie, starts at a new school and faces many difficulties, but he stays brave.", "ko": "주인공 어기는 새 학교에 다니며 많은 어려움을 겪지만 용기를 잃지 않습니다."}, {"en": "It taught me that choosing to be kind can change someone's whole day.", "ko": "친절을 선택하는 것이 누군가의 하루 전체를 바꿀 수 있다는 것을 배웠습니다."}]}, {"tag": "활동", "q": {"en": "What do you do outside of school?", "ko": "학교 밖에서는 무엇을 하나요?"}, "lines": [{"en": "I've been playing the cello for five years, and I'm a member of my school's robotics club.", "ko": "저는 5년 동안 첼로를 연주해 왔고, 학교 로봇 동아리 회원입니다."}, {"en": "One thing I'm really proud of is our robot, which won second place in a city competition last year.", "ko": "제가 정말 자랑스러운 것은 작년 시 대회에서 2등을 한 우리 팀 로봇입니다."}, {"en": "I'd love to continue playing the cello in your orchestra and try new activities like debate.", "ko": "귀교 오케스트라에서 첼로를 계속하고, 토론 같은 새로운 활동에도 도전하고 싶습니다."}]}, {"tag": "장점", "q": {"en": "What are your strengths?", "ko": "당신의 장점은 무엇인가요?"}, "lines": [{"en": "One of my strengths is that I don't give up easily.", "ko": "제 장점 중 하나는 쉽게 포기하지 않는다는 것입니다."}, {"en": "For example, when our robot kept falling over, I suggested that we test a new design every week until it worked.", "ko": "예를 들어 우리 로봇이 계속 넘어졌을 때, 제대로 작동할 때까지 매주 새 설계를 시험해 보자고 제안했습니다."}, {"en": "My friends would say I'm patient and hardworking, because I keep trying even when things are difficult.", "ko": "친구들은 제가 어려울 때도 계속 노력하기 때문에 인내심 있고 성실하다고 말할 거예요."}]}, {"tag": "단점", "q": {"en": "What is your weakness?", "ko": "당신의 단점은 무엇인가요?"}, "lines": [{"en": "My weakness is that I sometimes try to do everything by myself, so I've started asking teammates for help earlier.", "ko": "제 단점은 가끔 모든 것을 혼자 하려 한다는 것이라, 팀원들에게 더 일찍 도움을 요청하기 시작했습니다."}, {"en": "During our last group project, I divided the tasks with my team, and we finished two days early.", "ko": "지난 모둠 프로젝트에서는 팀원들과 일을 나눠서 이틀 일찍 끝냈습니다."}, {"en": "I learned that sharing work makes the result better.", "ko": "일을 나누면 결과가 더 좋아진다는 것을 배웠습니다."}]}, {"tag": "어려움 극복", "q": {"en": "Tell me about a challenge you faced.", "ko": "어려움을 겪었던 경험을 말해 주세요."}, "lines": [{"en": "One challenge I faced was moving to a new school in fifth grade.", "ko": "제가 겪은 어려움은 5학년 때 전학을 간 것이었습니다."}, {"en": "At first, I felt lonely because I didn't know anyone, but then I joined the orchestra and started talking to the people next to me.", "ko": "처음에는 아는 사람이 없어 외로웠지만, 오케스트라에 들어가 옆자리 친구들에게 먼저 말을 걸기 시작했습니다."}, {"en": "In the end, I made close friends, and I learned that taking the first step is the hardest but most important part.", "ko": "결국 친한 친구들을 사귀었고, 첫걸음을 내딛는 것이 가장 어렵지만 가장 중요하다는 것을 배웠습니다."}]}, {"tag": "기숙사 생활", "q": {"en": "Are you ready to live away from home?", "ko": "집을 떠나 생활할 준비가 되었나요?"}, "lines": [{"en": "Yes, I'm ready to live away from home because I've already attended a three-week summer camp abroad.", "ko": "네, 이미 해외에서 3주간 여름 캠프에 참가해 봐서 집을 떠나 생활할 준비가 되어 있습니다."}, {"en": "I did my own laundry, managed my schedule, and made friends from many countries.", "ko": "빨래도 스스로 하고, 일정도 관리하고, 여러 나라 친구들도 사귀었습니다."}, {"en": "If I feel homesick, I'll talk to my advisor and stay busy with activities.", "ko": "향수병이 생기면 어드바이저 선생님과 이야기하고 활동으로 바쁘게 지낼 거예요."}]}, {"tag": "룸메이트", "q": {"en": "How would you get along with a roommate?", "ko": "룸메이트와는 어떻게 지낼 건가요?"}, "lines": [{"en": "I think sharing a room is a great chance to learn about compromise and respect.", "ko": "룸메이트와 방을 함께 쓰는 것은 양보와 존중을 배울 좋은 기회라고 생각합니다."}, {"en": "If we had different habits, I would talk honestly and make simple rules together, like quiet hours at night.", "ko": "생활 습관이 다르다면 솔직하게 이야기하고, 밤에는 조용히 하기 같은 간단한 규칙을 함께 정하겠습니다."}, {"en": "I have a younger brother, so I'm used to sharing and being considerate.", "ko": "남동생이 있어서 나누고 배려하는 데 익숙합니다."}]}, {"tag": "시간 관리", "q": {"en": "How do you manage your time?", "ko": "시간 관리는 어떻게 하나요?"}, "lines": [{"en": "I manage my time by making a weekly plan and checking it every night.", "ko": "주간 계획을 세우고 매일 밤 확인하면서 시간을 관리합니다."}, {"en": "I write down my homework, practice time, and tests, and I finish the most important tasks first.", "ko": "숙제, 연습 시간, 시험을 적어 두고 가장 중요한 일부터 끝냅니다."}, {"en": "This helped me keep good grades while practicing the cello every day.", "ko": "덕분에 매일 첼로를 연습하면서도 좋은 성적을 유지할 수 있었습니다."}]}, {"tag": "유학 동기", "q": {"en": "Why do you want to study in the United States?", "ko": "왜 미국에서 공부하고 싶나요?"}, "lines": [{"en": "Studying in the U.S. will help me grow into a more independent and open-minded person.", "ko": "미국에서 공부하면 더 독립적이고 열린 사람으로 성장할 수 있을 것입니다."}, {"en": "I want to learn in small classes where I can share my ideas and ask a lot of questions.", "ko": "제 생각을 나누고 질문을 많이 할 수 있는 소규모 수업에서 배우고 싶습니다."}, {"en": "Growing up in Korea taught me the value of hard work and respect for others, and I'd love to bring that to your community.", "ko": "한국에서 자라며 노력의 가치와 타인에 대한 존중을 배웠고, 그것을 귀교 공동체에 가져가고 싶습니다."}]}, {"tag": "기여", "q": {"en": "What would you contribute to our community?", "ko": "우리 학교 공동체에 무엇을 기여할 수 있나요?"}, "lines": [{"en": "I'd love to share Korean culture with my classmates, for example through a Korean food night.", "ko": "한국 음식의 밤 같은 행사로 친구들과 한국 문화를 나누고 싶습니다."}, {"en": "I can also help in the orchestra and on the robotics team.", "ko": "오케스트라와 로봇 팀에서도 도움이 될 수 있습니다."}, {"en": "Most of all, I want to be a classmate who listens carefully and helps others.", "ko": "무엇보다 다른 사람의 말을 잘 듣고 돕는 친구가 되고 싶습니다."}]}, {"tag": "돌발 질문", "q": {"en": "If you could meet any person from history, who would it be?", "ko": "역사 속 인물 한 명을 만날 수 있다면 누구를 만나고 싶나요?"}, "lines": [{"en": "That's a great question. Let me think about it for a moment.", "ko": "좋은 질문이네요. 잠시 생각해 볼게요."}, {"en": "I would like to meet King Sejong, because he created Hangeul so that ordinary people could read and write.", "ko": "세종대왕을 만나고 싶습니다. 평범한 백성도 읽고 쓸 수 있도록 한글을 만드셨기 때문입니다."}, {"en": "I would ask him how he stayed determined when many officials opposed his idea.", "ko": "많은 신하가 반대했을 때 어떻게 뜻을 굽히지 않으셨는지 여쭤보고 싶습니다."}]}, {"tag": "마무리", "q": {"en": "Do you have any questions for me?", "ko": "저에게 궁금한 점이 있나요?"}, "lines": [{"en": "Yes, I do. What do students usually do on weekends?", "ko": "네, 있습니다. 학생들은 주말에 주로 무엇을 하나요?"}, {"en": "Also, how do advisors support new international students?", "ko": "그리고 어드바이저 선생님들은 새로 온 국제학생을 어떻게 도와주시나요?"}, {"en": "Thank you so much for your time. I really enjoyed talking with you.", "ko": "시간 내 주셔서 정말 감사합니다. 대화가 정말 즐거웠습니다."}]}], "sentences": [{"group": "1. 첫인사 · 자기소개", "lines": [{"en": "Good morning. Thank you for having me today.", "ko": "안녕하세요. 오늘 이 자리에 불러 주셔서 감사합니다.", "show": "Good morning. Thank you for having me today."}]}, {"group": "1. 첫인사 · 자기소개", "lines": [{"en": "My name is blank, and I'm in blank grade at blank School in Seoul.", "ko": "제 이름은 ___이고, 서울 ___학교 ___학년입니다.", "show": "My name is ___, and I'm in ___ grade at ___ School in Seoul."}]}, {"group": "1. 첫인사 · 자기소개", "lines": [{"en": "I would describe myself as a curious person who loves asking \"why.\"", "ko": "저는 '왜?'라고 묻기를 좋아하는 호기심 많은 사람이라고 생각합니다.", "show": "I would describe myself as a curious person who loves asking \"why.\""}]}, {"group": "1. 첫인사 · 자기소개", "lines": [{"en": "Outside of class, I spend most of my time blank.", "ko": "수업 외 시간에는 대부분 ___을 하며 보냅니다.", "show": "Outside of class, I spend most of my time ___."}]}, {"group": "1. 첫인사 · 자기소개", "lines": [{"en": "People who know me well would say I'm blank and blank, because blank.", "ko": "저를 잘 아는 사람들은 제가 ___하고 ___하다고 말할 거예요. 왜냐하면 ___.", "show": "People who know me well would say I'm ___ and ___, because ___."}]}, {"group": "2. 지원 동기", "lines": [{"en": "I'm interested in your school because of its blank program.", "ko": "귀교의 ___ 프로그램 때문에 지원하게 되었습니다.", "show": "I'm interested in your school because of its ___ program."}]}, {"group": "2. 지원 동기", "lines": [{"en": "When I visited the campus, I was impressed by blank.", "ko": "캠퍼스를 방문했을 때 ___이 정말 인상 깊었습니다.", "show": "When I visited the campus, I was impressed by ___."}]}, {"group": "2. 지원 동기", "lines": [{"en": "I'm looking for a community where I can challenge myself and learn from people with different backgrounds.", "ko": "스스로에게 도전하고 다양한 배경의 친구들에게 배울 수 있는 공동체를 찾고 있습니다.", "show": "I'm looking for a community where I can challenge myself and learn from people with different backgrounds."}]}, {"group": "2. 지원 동기", "lines": [{"en": "I believe I can contribute to your school by blank.", "ko": "저는 ___을 통해 학교에 기여할 수 있다고 생각합니다.", "show": "I believe I can contribute to your school by ___."}]}, {"group": "3. 학업", "lines": [{"en": "My favorite subject is blank because blank.", "ko": "제가 가장 좋아하는 과목은 ___입니다. 왜냐하면 ___.", "show": "My favorite subject is ___ because ___."}]}, {"group": "3. 학업", "lines": [{"en": "The subject I find most challenging is blank, but I've improved by blank.", "ko": "가장 어려운 과목은 ___이지만, ___을 하면서 실력이 늘었습니다.", "show": "The subject I find most challenging is ___, but I've improved by ___."}]}, {"group": "3. 학업", "lines": [{"en": "Recently, I read blank, and it made me think about blank.", "ko": "최근에 ___을 읽었는데, ___에 대해 생각해 보게 되었습니다.", "show": "Recently, I read ___, and it made me think about ___."}]}, {"group": "3. 학업", "lines": [{"en": "I enjoy projects where I can work with others and come up with creative solutions.", "ko": "다른 사람과 협력해 창의적인 해결책을 찾는 프로젝트를 좋아합니다.", "show": "I enjoy projects where I can work with others and come up with creative solutions."}]}, {"group": "4. 활동 · 관심사", "lines": [{"en": "I've been playing blank for blank years.", "ko": "저는 ___을 ___년 동안 해 왔습니다.", "show": "I've been playing ___ for ___ years."}]}, {"group": "4. 활동 · 관심사", "lines": [{"en": "One thing I'm really proud of is blank.", "ko": "제가 정말 자랑스럽게 생각하는 것은 ___입니다.", "show": "One thing I'm really proud of is ___."}]}, {"group": "4. 활동 · 관심사", "lines": [{"en": "Through blank, I learned the importance of teamwork and responsibility.", "ko": "___을 통해 팀워크와 책임감의 중요성을 배웠습니다.", "show": "Through ___, I learned the importance of teamwork and responsibility."}]}, {"group": "4. 활동 · 관심사", "lines": [{"en": "I'd love to continue blank at your school and try new activities like blank.", "ko": "귀교에서도 ___을 계속하고, ___ 같은 새로운 활동에도 도전하고 싶습니다.", "show": "I'd love to continue ___ at your school and try new activities like ___."}]}, {"group": "5. 장점 · 단점 · 어려움 극복", "lines": [{"en": "One of my strengths is blank. For example, blank.", "ko": "제 장점 중 하나는 ___입니다. 예를 들어 ___.", "show": "One of my strengths is ___. For example, ___."}]}, {"group": "5. 장점 · 단점 · 어려움 극복", "lines": [{"en": "My weakness is that I sometimes blank, so I've started blank to work on it.", "ko": "제 단점은 가끔 ___한다는 것인데, 이를 고치려고 ___을 시작했습니다.", "show": "My weakness is that I sometimes ___, so I've started ___ to work on it."}]}, {"group": "5. 장점 · 단점 · 어려움 극복", "lines": [{"en": "One challenge I faced was blank. At first, I blank, but then I blank.", "ko": "제가 겪은 어려움은 ___이었습니다. 처음에는 ___했지만, 그 후 ___했습니다.", "show": "One challenge I faced was ___. At first, I ___, but then I ___."}]}, {"group": "5. 장점 · 단점 · 어려움 극복", "lines": [{"en": "In the end, blank, and I learned that blank.", "ko": "결국 ___했고, ___라는 것을 배웠습니다.", "show": "In the end, ___, and I learned that ___."}]}, {"group": "6. 기숙사 생활 · 독립성", "lines": [{"en": "I'm ready to live away from home because I've already blank (e.g., attended a summer camp abroad).", "ko": "저는 이미 ___(예: 해외 여름 캠프 참가)을 해 봐서 집을 떠나 생활할 준비가 되어 있습니다.", "show": "I'm ready to live away from home because I've already ___ (e.g., attended a summer camp abroad)."}]}, {"group": "6. 기숙사 생활 · 독립성", "lines": [{"en": "If I feel homesick, I'll talk to my advisor and stay busy with activities.", "ko": "향수병이 생기면 어드바이저 선생님과 이야기하고 활동으로 바쁘게 지낼 거예요.", "show": "If I feel homesick, I'll talk to my advisor and stay busy with activities."}]}, {"group": "6. 기숙사 생활 · 독립성", "lines": [{"en": "I think sharing a room is a great chance to learn about compromise and respect.", "ko": "룸메이트와 방을 함께 쓰는 것은 양보와 존중을 배울 좋은 기회라고 생각합니다.", "show": "I think sharing a room is a great chance to learn about compromise and respect."}]}, {"group": "6. 기숙사 생활 · 독립성", "lines": [{"en": "I manage my time by making a weekly plan and checking it every night.", "ko": "저는 주간 계획을 세우고 매일 밤 확인하면서 시간을 관리합니다.", "show": "I manage my time by making a weekly plan and checking it every night."}]}, {"group": "7. 유학 · 한국 배경", "lines": [{"en": "Studying in the U.S. will help me grow into a more independent and open-minded person.", "ko": "미국에서 공부하면 더 독립적이고 열린 사람으로 성장할 수 있을 것입니다.", "show": "Studying in the U.S. will help me grow into a more independent and open-minded person."}]}, {"group": "7. 유학 · 한국 배경", "lines": [{"en": "Growing up in Korea taught me the value of hard work and respect for others.", "ko": "한국에서 자라며 노력의 가치와 타인에 대한 존중을 배웠습니다.", "show": "Growing up in Korea taught me the value of hard work and respect for others."}]}, {"group": "7. 유학 · 한국 배경", "lines": [{"en": "I'd love to share Korean culture with my classmates, for example through blank.", "ko": "___ 같은 방법으로 친구들과 한국 문화를 나누고 싶습니다.", "show": "I'd love to share Korean culture with my classmates, for example through ___."}]}, {"group": "8. 생각할 시간 벌기 · 되묻기 (가장 중요!)", "lines": [{"en": "That's a great question. Let me think about it for a moment.", "ko": "좋은 질문이네요. 잠시 생각해 볼게요.", "show": "That's a great question. Let me think about it for a moment."}]}, {"group": "8. 생각할 시간 벌기 · 되묻기 (가장 중요!)", "lines": [{"en": "Could you please repeat the question?", "ko": "질문을 다시 한번 말씀해 주시겠어요?", "show": "Could you please repeat the question?"}]}, {"group": "8. 생각할 시간 벌기 · 되묻기 (가장 중요!)", "lines": [{"en": "Just to make sure I understand, do you mean blank?", "ko": "제가 제대로 이해했는지 확인하고 싶은데, ___라는 뜻인가요?", "show": "Just to make sure I understand, do you mean ___?"}]}, {"group": "8. 생각할 시간 벌기 · 되묻기 (가장 중요!)", "lines": [{"en": "I've never thought about that before, but I would say blank.", "ko": "그건 생각해 본 적이 없지만, 제 생각에는 ___입니다.", "show": "I've never thought about that before, but I would say ___."}]}, {"group": "9. 면접관에게 하는 질문", "lines": [{"en": "What do students usually do on weekends?", "ko": "학생들은 주말에 주로 무엇을 하나요?", "show": "What do students usually do on weekends?"}]}, {"group": "9. 면접관에게 하는 질문", "lines": [{"en": "How do advisors support new international students?", "ko": "어드바이저 선생님들은 새로 온 국제학생을 어떻게 도와주시나요?", "show": "How do advisors support new international students?"}]}, {"group": "9. 면접관에게 하는 질문", "lines": [{"en": "What do you think makes students successful here?", "ko": "이 학교에서 잘 해내는 학생들의 공통점은 무엇이라고 생각하세요?", "show": "What do you think makes students successful here?"}]}, {"group": "10. 마무리 인사", "lines": [{"en": "Thank you so much for your time. I really enjoyed talking with you.", "ko": "시간 내 주셔서 정말 감사합니다. 대화가 정말 즐거웠습니다.", "show": "Thank you so much for your time. I really enjoyed talking with you."}]}, {"group": "10. 마무리 인사", "lines": [{"en": "I hope to see you again in the fall.", "ko": "가을에 다시 뵙기를 바랍니다.", "show": "I hope to see you again in the fall."}]}], "isee": [{"group": "Synonyms · 동의어", "tag": "동의어", "title": "Benevolent", "lines": [{"en": "Benevolent means kind.", "ko": "benevolent = 자비로운, 친절한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Meticulous", "lines": [{"en": "Meticulous means careful and precise.", "ko": "meticulous = 꼼꼼한, 세심한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Reluctant", "lines": [{"en": "Reluctant means unwilling.", "ko": "reluctant = 꺼리는, 내키지 않는"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Candid", "lines": [{"en": "Candid means honest.", "ko": "candid = 솔직한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Diligent", "lines": [{"en": "Diligent means hardworking.", "ko": "diligent = 부지런한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Scarce", "lines": [{"en": "Scarce means rare.", "ko": "scarce = 드문, 부족한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Feeble", "lines": [{"en": "Feeble means weak.", "ko": "feeble = 연약한, 힘없는"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Elated", "lines": [{"en": "Elated means overjoyed.", "ko": "elated = 크게 기뻐하는"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Obsolete", "lines": [{"en": "Obsolete means outdated.", "ko": "obsolete = 구식의, 더 이상 쓰이지 않는"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Tranquil", "lines": [{"en": "Tranquil means calm.", "ko": "tranquil = 고요한, 평온한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Hostile", "lines": [{"en": "Hostile means unfriendly.", "ko": "hostile = 적대적인"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Abundant", "lines": [{"en": "Abundant means plentiful.", "ko": "abundant = 풍부한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Frugal", "lines": [{"en": "Frugal means thrifty.", "ko": "frugal = 검소한, 알뜰한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Vivid", "lines": [{"en": "Vivid means bright.", "ko": "vivid = 선명한, 생생한"}]}, {"group": "Synonyms · 동의어", "tag": "동의어", "title": "Concise", "lines": [{"en": "Concise means brief.", "ko": "concise = 간결한"}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "Because the hikers had exhausted their water supply early in the day, they were thirsty by afternoon.", "ko": "등산객들은 일찍 물을 다 써 버려서 오후에는 목이 말랐다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "Maria was known for her persistence; she never gave up, even when a problem took hours to solve.", "ko": "마리아는 끈기로 유명했다. 문제를 푸는 데 몇 시간이 걸려도 결코 포기하지 않았다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "The museum's new exhibit was so popular that visitors waited in line for over an hour to see it.", "ko": "박물관의 새 전시는 인기가 너무 많아서 관람객들이 한 시간 넘게 줄을 서서 기다렸다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "Although the instructions seemed confusing at first, they became clear once the teacher showed an example.", "ko": "설명은 처음엔 헷갈려 보였지만, 선생님이 예시를 보여 주자 명확해졌다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "The scientist remained cautious about the results, refusing to celebrate until the experiment had been repeated.", "ko": "그 과학자는 결과에 대해 신중했고, 실험을 다시 해 보기 전까지는 축하하지 않았다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "The sleepy town grew into a busy city after the railroad was built.", "ko": "한적한 마을은 철도가 놓인 뒤 번화한 도시로 성장했다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "Rather than conceal his mistake, Leo admitted it and apologized.", "ko": "레오는 실수를 숨기는 대신 인정하고 사과했다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "The speaker's argument was convincing, supported by evidence and clear reasoning.", "ko": "연사의 주장은 증거와 명확한 논리로 뒷받침되어 설득력이 있었다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "Ancient pottery is fragile, so archaeologists handle it with great care.", "ko": "고대 도자기는 깨지기 쉬워서 고고학자들은 매우 조심스럽게 다룬다."}]}, {"group": "Sentence Completion · 빈칸 완성 (정답 넣은 문장)", "tag": "빈칸 완성", "lines": [{"en": "The coach praised the team not only for winning but also for showing respect toward their opponents.", "ko": "코치는 팀이 이긴 것뿐 아니라 상대 팀을 존중한 것도 칭찬했다."}]}]};
+
+(function () {
+  const synth = window.speechSynthesis;
+  const $ = (id) => document.getElementById(id);
+  const listEl = $("list"), playBtn = $("playBtn"), nowLabel = $("nowLabel"), bar = $("bar");
+  const rateSel = $("rate"), thinkSel = $("think"), repeatSel = $("repeatMode"), voiceSel = $("voice");
+  const sayKo = $("sayKo"), hideAns = $("hideAns"), notice = $("ttsNotice");
+
+  let tab = "qa";
+  let items = [];          // 현재 탭 항목
+  let cur = 0;             // 현재 항목 번호
+  let playing = false;
+  let runId = 0;           // 재생을 멈추거나 바꿀 때 이전 재생 흐름을 끊는 번호
+  let enVoice = null, koVoice = null;
+  let keepAlive = [];      // 크롬에서 읽는 도중 발화 객체가 사라지면 onend 가 안 오는 문제 방지
+  let wakeLock = null;
+
+  // ---------- 설정 저장 (이 브라우저에만) ----------
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("listen:" + k); return v === null ? d : v; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem("listen:" + k, v); } catch (e) {} },
+  };
+  rateSel.value = store.get("rate", "1");
+  thinkSel.value = store.get("think", "5");
+  repeatSel.value = store.get("repeat", "all");
+  sayKo.checked = store.get("ko", "1") === "1";
+  hideAns.checked = store.get("hide", "0") === "1";
+  [[rateSel, "rate"], [thinkSel, "think"], [repeatSel, "repeat"], [voiceSel, "voice"]].forEach(([el, k]) =>
+    el.addEventListener("change", () => store.set(k, el.value)));
+  sayKo.addEventListener("change", () => store.set("ko", sayKo.checked ? "1" : "0"));
+  hideAns.addEventListener("change", () => { store.set("hide", hideAns.checked ? "1" : "0"); applyHide(); });
+
+  // ---------- 목소리 ----------
+  function pickVoices() {
+    if (!synth) return;
+    const voices = synth.getVoices();
+    const en = voices.filter((v) => /^en[-_]/i.test(v.lang));
+    const prefer = (v) => (/en[-_]US/i.test(v.lang) ? 2 : 0) + (/natural|google|samantha|aria|jenny|guy|alex/i.test(v.name) ? 1 : 0);
+    en.sort((a, b) => prefer(b) - prefer(a));
+    const saved = store.get("voice", "");
+    voiceSel.innerHTML = '<option value="">자동 선택</option>' +
+      en.map((v) => `<option value="${escapeAttr(v.name)}">${escapeHtml(v.name)} (${v.lang})</option>`).join("");
+    if (saved && en.some((v) => v.name === saved)) voiceSel.value = saved;
+    enVoice = en.find((v) => v.name === voiceSel.value) || en[0] || null;
+    koVoice = voices.find((v) => /^ko/i.test(v.lang)) || null;
+    if (voices.length && !koVoice) {
+      notice.textContent = "이 기기에는 한국어 음성이 없어서 한국어 뜻은 화면으로만 보여 줘요. 영어 음성은 정상적으로 나와요.";
+    }
+  }
+  voiceSel.addEventListener("change", () => {
+    enVoice = (synth ? synth.getVoices() : []).find((v) => v.name === voiceSel.value) || enVoice;
+  });
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+  function escapeAttr(s) { return escapeHtml(s); }
+
+  // ---------- 화면 그리기 ----------
+  function render() {
+    items = DATA[tab];
+    let html = "", lastGroup = null;
+    items.forEach((it, i) => {
+      if (it.group && it.group !== lastGroup) { html += `<h2 class="group-title">${escapeHtml(it.group)}</h2>`; lastGroup = it.group; }
+      const head = it.q
+        ? `<div class="q"><span class="tag">${escapeHtml(it.tag)}</span><span class="en">${escapeHtml(it.q.en)}</span><span class="ko">${escapeHtml(it.q.ko)}</span></div>`
+        : `<div class="q">${it.tag ? `<span class="tag">${escapeHtml(it.tag)}</span>` : ""}${it.title ? `<span class="word">${escapeHtml(it.title)}</span>` : ""}</div>`;
+      const lines = it.lines.map((l, j) =>
+        `<div class="line" data-i="${i}" data-j="${j}" tabindex="0"><span class="en">${escapeHtml(l.show || l.en)}</span><span class="ko">${escapeHtml(l.ko)}</span></div>`).join("");
+      html += `<article class="card" id="item-${i}" data-i="${i}">
+        <div class="card-head"><span class="num">${String(i + 1).padStart(2, "0")}</span>${head}
+        <button class="play-one" type="button" data-i="${i}" aria-label="${i + 1}번 듣기">▶</button></div>
+        <div class="lines">${lines}</div></article>`;
+    });
+    listEl.innerHTML = html;
+    document.querySelectorAll(".tab").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+    applyHide();
+    updateProgress();
+  }
+
+  function applyHide() {
+    // 면접 탭은 영어·한국어 답 모두 가리고, 나머지 탭은 영어만 가려서 한국어 뜻을 보고 떠올리게 함
+    listEl.classList.toggle("hide-ans", hideAns.checked);
+    listEl.classList.toggle("hide-ko-only", hideAns.checked && tab !== "qa");
+    if (!hideAns.checked) document.querySelectorAll(".line.revealed").forEach((el) => el.classList.remove("revealed"));
+  }
+
+  function updateProgress() {
+    bar.style.width = items.length ? ((cur + (playing ? 1 : 0)) / items.length) * 100 + "%" : "0";
+  }
+
+  // ---------- 음성 ----------
+  function speak(text, lang, myRun) {
+    return new Promise((resolve) => {
+      if (!synth || myRun !== runId) return resolve();
+      if (lang === "ko" && !koVoice) return resolve();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === "ko" ? "ko-KR" : "en-US";
+      const v = lang === "ko" ? koVoice : enVoice;
+      if (v) u.voice = v;
+      u.rate = parseFloat(rateSel.value) * (lang === "ko" ? 1.05 : 1);
+      let done = false;
+      const finish = () => { if (done) return; done = true; clearTimeout(guard); keepAlive = keepAlive.filter((x) => x !== u); resolve(); };
+      u.onend = finish;
+      u.onerror = finish;
+      // 일부 기기에서 onend 가 오지 않는 경우를 대비한 안전장치
+      const guard = setTimeout(finish, (text.length * 110) / u.rate + 4000);
+      keepAlive.push(u);
+      synth.speak(u);
+    });
+  }
+  const wait = (ms, myRun) => new Promise((r) => setTimeout(r, myRun === runId ? ms : 0));
+
+  function clearMarks() {
+    document.querySelectorAll(".speaking").forEach((el) => el.classList.remove("speaking"));
+    document.querySelectorAll(".card.now").forEach((el) => el.classList.remove("now"));
+  }
+
+  async function playItem(i, myRun) {
+    const it = items[i];
+    const card = $("item-" + i);
+    clearMarks();
+    card.classList.add("now");
+    card.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    nowLabel.innerHTML = `<b>${i + 1} / ${items.length}</b> · ${escapeHtml(it.q ? it.q.en : (it.title || it.lines[0].en))}`;
+    updateProgress();
+
+    if (it.q) {
+      const qEl = card.querySelector(".q");
+      qEl.classList.add("speaking");
+      await speak(it.q.en, "en", myRun);
+      if (sayKo.checked) await speak(it.q.ko, "ko", myRun);
+      qEl.classList.remove("speaking");
+      const t = parseInt(thinkSel.value, 10);
+      if (t > 0 && myRun === runId) {
+        for (let s = t; s > 0 && myRun === runId; s--) {
+          nowLabel.innerHTML = `<b>${i + 1} / ${items.length}</b> · 직접 답해 보세요… ${s}초`;
+          await wait(1000, myRun);
+        }
+      }
+    }
+    for (let j = 0; j < it.lines.length && myRun === runId; j++) {
+      const el = card.querySelector(`.line[data-j="${j}"]`);
+      el.classList.add("speaking", "revealed");
+      await speak(it.lines[j].en, "en", myRun);
+      if (sayKo.checked) await speak(it.lines[j].ko, "ko", myRun);
+      el.classList.remove("speaking");
+      await wait(350, myRun);
+    }
+    await wait(1100, myRun);
+  }
+
+  async function run(startAt) {
+    const myRun = ++runId;
+    cur = startAt;
+    while (myRun === runId) {
+      await playItem(cur, myRun);
+      if (myRun !== runId) return;
+      const mode = repeatSel.value;
+      if (mode === "one") continue;
+      if (cur + 1 < items.length) { cur++; continue; }
+      if (mode === "all") { cur = 0; continue; }
+      stop("다 들었어요. ▶ 를 누르면 처음부터 다시 들려줘요.");
+      cur = 0;
+      return;
+    }
+  }
+
+  async function start(i) {
+    if (!synth) return;
+    runId++; // 이전 재생 흐름을 즉시 끊음 (아래 await 동안 이전 흐름이 다음 문장을 읽지 않도록)
+    synth.cancel();
+    playing = true;
+    playBtn.textContent = "⏸ 멈춤";
+    try { if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen"); } catch (e) { wakeLock = null; }
+    run(i);
+  }
+
+  function stop(msg) {
+    runId++;
+    playing = false;
+    if (synth) synth.cancel();
+    clearMarks();
+    playBtn.textContent = "▶ 이어서 듣기";
+    if (msg) { nowLabel.textContent = msg; playBtn.textContent = "▶ 듣기 시작"; }
+    if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+    updateProgress();
+  }
+
+  // 한 문장만 듣기 (목록 재생은 멈춤)
+  async function speakOne(i, j) {
+    if (!synth) return;
+    if (playing) stop();
+    synth.cancel();
+    const myRun = ++runId;
+    const el = document.querySelector(`.line[data-i="${i}"][data-j="${j}"]`);
+    clearMarks();
+    el.classList.add("speaking", "revealed");
+    await speak(items[i].lines[j].en, "en", myRun);
+    if (sayKo.checked) await speak(items[i].lines[j].ko, "ko", myRun);
+    if (myRun === runId) el.classList.remove("speaking");
+    cur = i;
+  }
+
+  // ---------- 이벤트 ----------
+  playBtn.addEventListener("click", () => (playing ? stop() : start(cur)));
+  $("prevBtn").addEventListener("click", () => { cur = Math.max(0, cur - 1); if (playing) start(cur); else highlightOnly(); });
+  $("nextBtn").addEventListener("click", () => { cur = Math.min(items.length - 1, cur + 1); if (playing) start(cur); else highlightOnly(); });
+  function highlightOnly() {
+    clearMarks();
+    const card = $("item-" + cur);
+    card.classList.add("now");
+    card.scrollIntoView({ block: "center" });
+    nowLabel.innerHTML = `<b>${cur + 1} / ${items.length}</b> · ▶ 를 누르면 여기서부터 들려줘요.`;
+    updateProgress();
+  }
+  listEl.addEventListener("click", (e) => {
+    const one = e.target.closest(".play-one");
+    if (one) { start(parseInt(one.dataset.i, 10)); return; }
+    const line = e.target.closest(".line");
+    if (line) speakOne(parseInt(line.dataset.i, 10), parseInt(line.dataset.j, 10));
+  });
+  listEl.addEventListener("keydown", (e) => {
+    const line = e.target.closest(".line");
+    if (line && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); speakOne(parseInt(line.dataset.i, 10), parseInt(line.dataset.j, 10)); }
+  });
+
+  function setTab(t, fromHash) {
+    if (!DATA[t]) t = "qa";
+    if (playing) stop();
+    tab = t; cur = 0;
+    render();
+    nowLabel.textContent = "▶ 를 누르면 처음부터 들려줘요.";
+    playBtn.textContent = "▶ 듣기 시작";
+    if (!fromHash && location.hash !== "#" + t) history.replaceState(null, "", "#" + t);
+  }
+  document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => setTab(b.dataset.tab)));
+  window.addEventListener("hashchange", () => setTab(location.hash.slice(1), true));
+
+  // 화면이 다시 켜졌을 때 멈춘 음성 이어가기 (일부 브라우저)
+  document.addEventListener("visibilitychange", async () => {
+    if (document.visibilityState === "visible" && playing) {
+      if (synth && synth.paused) synth.resume();
+      if ("wakeLock" in navigator && !wakeLock) { try { wakeLock = await navigator.wakeLock.request("screen"); } catch (e) {} }
+    }
+  });
+
+  if (!synth || typeof SpeechSynthesisUtterance === "undefined") {
+    notice.className = "notice warn";
+    notice.textContent = "이 브라우저는 음성 읽기를 지원하지 않아요. 크롬, 사파리, 엣지 최신 버전에서 열어 주세요. 문장은 화면으로 볼 수 있어요.";
+    playBtn.disabled = true;
+  } else {
+    pickVoices();
+    if (typeof synth.addEventListener === "function") synth.addEventListener("voiceschanged", pickVoices);
+    else synth.onvoiceschanged = pickVoices;
+  }
+
+  setTab(location.hash.slice(1) || "qa", true);
+})();
+</script>
+
+</body>
+</html>

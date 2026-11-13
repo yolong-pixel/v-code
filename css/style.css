@@ -443,3 +443,5 @@ input, select, button {
 }
 
 .download-btn:hover { filter: brightness(1.08); }
+
+.listen-btn { background: var(--accent); }
